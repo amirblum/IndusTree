@@ -503,7 +503,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _emptyTile
       value: 
-      objectReference: {fileID: 616626625511098610, guid: 7350e7555d44a4ca0a19757602062a8b,
+      objectReference: {fileID: 8217550985592237431, guid: b2cf4164ef3b14e54a2207b5125b4055,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c02a658579f964c6e8a88c8d3dac29b7, type: 3}
