@@ -9,18 +9,18 @@ public class BoardData
     {
         public int x;
         public int y;
-        
+
         public BoardPos Up()
         {
             return new BoardPos { x = this.x, y = this.y + 1 };
         }
         public BoardPos Down()
         {
-            return new BoardPos { x = this.x, y = this.y -1 };
+            return new BoardPos { x = this.x, y = this.y - 1 };
         }
         public BoardPos Left()
         {
-            return new BoardPos { x = this.x - 1 , y = this.y };
+            return new BoardPos { x = this.x - 1, y = this.y };
         }
         public BoardPos Right()
         {
@@ -38,6 +38,7 @@ public class BoardData
 
     // Private variables
     private TileData[,] _board;
+    private TileData _outOfBoundsTile = new TileData(TileData.TileType.OutOfBounds);
 
     public BoardData()
     {
@@ -56,25 +57,108 @@ public class BoardData
             {
                 var tile = new TileData();
                 var pos = new BoardPos { x = i, y = j };
-                PlaceTile(tile, pos);
+                _board[pos.x, pos.y] = tile;
+                OnPlacedTileEvent?.Invoke(tile, pos);
             }
         }
     }
-
     public TileData GetTile(BoardPos position)
     {
+        if (position.x < 0 || position.x >= BoardSize || position.y < 0 || position.y >= BoardSize)
+        {
+            return _outOfBoundsTile;
+        }
         return _board[position.x, position.y];
     }
 
-    public void PlaceTile(TileData tile, BoardPos position)
+    public void PlaceTile(TileData newTile, BoardPos newTilePosition)
     {
-        Debug.Assert(_board[position.x, position.y] == null ||
-        _board[position.x, position.y].tileType == TileData.TileType.Empty, 
+        Debug.Assert(_board[newTilePosition.x, newTilePosition.y].tileType == TileData.TileType.Empty,
             "Trying to place tile on non-empty spot!");
 
-        _board[position.x, position.y] = tile;
+        // Place the tile on the board.
+        _board[newTilePosition.x, newTilePosition.y] = newTile;
+        OnPlacedTileEvent?.Invoke(newTile, newTilePosition);
 
-        OnPlacedTileEvent?.Invoke(tile, position);
+        // Check the quads.
+        var quads = GetQuads(newTilePosition);
+
+        foreach (var quad in quads)
+        {
+            if (QuadIsClosed(quad))
+            {
+                // Raise the quad
+                foreach (var tile in quad)
+                {
+                    tile.amountToRaiseTile++;
+                }
+            }
+        }
+
+        var niner = GetNiner(newTilePosition);
+
+        foreach (var tile in niner)
+        {
+            tile.RaiseTile();    
+        }
     }
 
+    private TileData[][] GetQuads(BoardPos newTilePos)
+    {
+        var quads = new TileData[4][];
+        quads[0] = GetQuad(newTilePos);
+        quads[0] = GetQuad(newTilePos.Left());
+        quads[0] = GetQuad(newTilePos.Left().Down());
+        quads[0] = GetQuad(newTilePos.Down());
+        return quads;
+    }
+
+    private TileData[] GetQuad(BoardPos quadBottomLeft)
+    {
+        var quad = new TileData[4];
+        quad[0] = GetTile(quadBottomLeft);
+        quad[1] = GetTile(quadBottomLeft.Right());
+        quad[2] = GetTile(quadBottomLeft.Up());
+        quad[3] = GetTile(quadBottomLeft.Up().Right());
+        return quad;
+    }
+
+    private bool QuadIsClosed(TileData[] quad)
+    {
+        int i = 0;
+        int j = 0;
+
+        // Bottom Left
+        foreach (var tile in quad)
+        {
+            switch (tile.tileType)
+            {
+                case TileData.TileType.Organic:
+                    i++;
+                    break;
+                case TileData.TileType.Mechanic:
+                    j++;
+                    break;
+            }
+        }
+
+        return (i == 3 && j == 1) || (i == 1 && j == 3);
+    }
+
+    private TileData[] GetNiner(BoardPos centerPosition)
+    {
+        var niner = new TileData[9];
+
+        niner[0] = GetTile(centerPosition.Down().Left());
+        niner[1] = GetTile(centerPosition.Down());
+        niner[2] = GetTile(centerPosition.Down().Right());
+        niner[3] = GetTile(centerPosition.Left());
+        niner[4] = GetTile(centerPosition);
+        niner[5] = GetTile(centerPosition.Right());
+        niner[6] = GetTile(centerPosition.Up().Left());
+        niner[7] = GetTile(centerPosition.Up());
+        niner[8] = GetTile(centerPosition.Up().Right());
+
+        return niner;
+    }
 }
