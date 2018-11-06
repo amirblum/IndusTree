@@ -56,10 +56,14 @@ public class BoardData
             for (int j = 0; j < BoardSize; j++)
             {
                 var pos = new BoardPos { x = i, y = j };
-                var emptyTile = new TileData();
+                var tileData = new TileData();
 
-                _board[i, j] = new TileData();
-                OnPlacedTileEvent?.Invoke(emptyTile, pos);
+                if (i == boardSize / 2 + 1 && j == boardSize / 2 + 1)
+                {
+                    tileData.tileType = TileData.TileType.Organic;
+                }
+                _board[i, j] = tileData;
+                OnPlacedTileEvent?.Invoke(tileData, pos);
             }
         }
     }
