@@ -15,16 +15,16 @@ public class TileView : MonoBehaviour
         _models.Add(GetComponentInChildren<MeshRenderer>().gameObject);
     }
     
-    private TileData _tileData;
+    public TileData tileData;
     public void SetTileData(TileData tileData)
     {
-        _tileData = tileData;
-        _tileData.RaiseTileEvent += OnRaiseTile;
+        this.tileData = tileData;
+        this.tileData.RaiseTileEvent += OnRaiseTile;
     }
 
     private void OnRaiseTile(TileData tileData, int previousHeight, int newHeight)
     {
-        Debug.Log("Raising tile " + _tileData.tileType + " by " + (newHeight - previousHeight));
+        Debug.Log("Raising tile " + this.tileData.tileType + " by " + (newHeight - previousHeight));
         for (int i = previousHeight; i < newHeight; i++)
         {
             var newModel = Instantiate(_models[0]);

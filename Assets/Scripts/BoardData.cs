@@ -38,7 +38,7 @@ public class BoardData
 
     // Private variables
     private TileData[,] _board;
-    private TileData _outOfBoundsTile = new TileData(TileData.TileType.OutOfBounds);
+    private TileData _outOfBoundsTile = new TileData(TileData.TileType.OutOfBounds, new BoardPos {x = -1, y = -1});
 
     public BoardData()
     {
@@ -56,7 +56,7 @@ public class BoardData
             for (int j = 0; j < BoardSize; j++)
             {
                 var pos = new BoardPos { x = i, y = j };
-                var tileData = new TileData();
+                var tileData = new TileData(pos);
 
                 if (i == 3 && j == 0)
                 {
@@ -78,17 +78,19 @@ public class BoardData
 
     public void PlaceTile(TileData.TileType newTileType, BoardPos newTilePosition)
     {
-        Debug.Assert(_board[newTilePosition.x, newTilePosition.y].tileType == TileData.TileType.Empty,
+        Debug.Assert((_board[newTilePosition.x, newTilePosition.y].tileType == TileData.TileType.Empty ||
+        newTileType == TileData.TileType.Destroyed),
             "Trying to place tile on non-empty spot!");
 
         // Place the tile on the board.
-        var newTile = new TileData(newTileType);
+        var newTile = new TileData(newTileType, newTilePosition);
         _board[newTilePosition.x, newTilePosition.y] = newTile;
         OnPlacedTileEvent?.Invoke(newTile, newTilePosition);
 
         // Check the quads.
         var quads = GetQuads(newTilePosition);
         bool closedAQuad = false;
+        bool destroyAQuad = false;
 
         foreach (var quad in quads)
         {
@@ -101,9 +103,23 @@ public class BoardData
                     tile.amountToRaiseTile++;
                 }
                 closedAQuad = true;
+            } 
+            else if (QuadIsDestroyed(quad))
+            {
+                destroyAQuad = true;
             }
         }
-        if (closedAQuad) 
+        if (destroyAQuad)
+        {
+            var niner = GetNiner(newTilePosition);
+            
+            foreach (var tile in niner)
+            {
+                PlaceTile(TileData.TileType.Destroyed, tile.boardPos);
+            }
+
+        }
+        else if (closedAQuad) 
         {
             var niner = GetNiner(newTilePosition);
 
@@ -154,6 +170,28 @@ public class BoardData
         }
 
         return (i == 3 && j == 1) || (i == 1 && j == 3);
+    }
+
+    private bool QuadIsDestroyed(TileData[] quad)
+    {
+        int i = 0;
+        int j = 0;
+
+        // Bottom Left
+        foreach (var tile in quad)
+        {
+            switch (tile.tileType)
+            {
+                case TileData.TileType.Organic:
+                    i++;
+                    break;
+                case TileData.TileType.Mechanic:
+                    j++;
+                    break;
+            }
+        }
+
+        return (i == 4 || j == 4);
     }
 
     private TileData[] GetNiner(BoardPos centerPosition)

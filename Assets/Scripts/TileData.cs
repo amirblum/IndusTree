@@ -7,25 +7,34 @@ public class TileData
 {
     public enum TileType
     {
-        OutOfBounds = -2,
+        OutOfBounds = -3,
+        Destroyed = -2,
         Empty = -1,
         Organic = 0,
-        Mechanic = 1
+        Mechanic = 1,
     }
 
     public TileType tileType;
     public int tileLevel;
+    public BoardData.BoardPos boardPos;
     public int amountToRaiseTile;
 
     public event Action<TileData, int, int> RaiseTileEvent;
 
-    public TileData()
+    public TileData(BoardData.BoardPos boardPos)
     {
+        this.boardPos = boardPos;
         tileType = TileType.Empty;
     }
 
     public TileData(TileType tileType)
     {
+        this.tileType = tileType;
+    }
+
+    public TileData(TileType tileType, BoardData.BoardPos boardPos)
+    {
+        this.boardPos = boardPos;
         this.tileType = tileType;
     }
 

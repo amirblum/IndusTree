@@ -8,6 +8,7 @@ public class BoardView : MonoBehaviour
     public static BoardView Instance;
     [SerializeField] int _boardSize;
     [SerializeField] TileView _emptyTile;
+    [SerializeField] TileView _destroyedTile;
     [SerializeField] TileView[] _playerTiles;
     [SerializeField] Text[] _playerScoresText;
     private int[] _playerScores;
@@ -48,10 +49,11 @@ public class BoardView : MonoBehaviour
     {
         // Out with the old!
         var currentTile = _placedTiles[pos.x, pos.y];
+        Debug.Log("Destroying " + currentTile.tileData);
         Destroy(currentTile);
 
         // In with the new!
-        var newTile = Instantiate(GetTileFromData(tileData));
+        TileView newTile = Instantiate(GetTileFromData(tileData));
         newTile.SetTileData(tileData);
         tileData.RaiseTileEvent += OnRaisedTile;
 
@@ -82,6 +84,11 @@ public class BoardView : MonoBehaviour
         if (tileData.tileType == TileData.TileType.Empty)
         {
             return _emptyTile;
+        }
+        
+        if (tileData.tileType == TileData.TileType.Destroyed)
+        {
+            return _destroyedTile;
         }
 
         return _playerTiles[(int)tileData.tileType];
