@@ -17,7 +17,7 @@ public class TileData
     public int tileLevel;
     public int amountToRaiseTile;
 
-    public event Action<int, int> RaiseTileEvent;
+    public event Action<TileData, int, int> RaiseTileEvent;
 
     public TileData()
     {
@@ -35,7 +35,7 @@ public class TileData
         {
             return;
         }
-        RaiseTileEvent?.Invoke(tileLevel, tileLevel + amountToRaiseTile);
+        RaiseTileEvent?.Invoke(this, tileLevel, tileLevel + amountToRaiseTile);
         tileLevel += amountToRaiseTile;
         amountToRaiseTile = 0;
     }

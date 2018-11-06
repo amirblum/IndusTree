@@ -22,7 +22,7 @@ public class TileView : MonoBehaviour
         _tileData.RaiseTileEvent += OnRaiseTile;
     }
 
-    private void OnRaiseTile(int previousHeight, int newHeight)
+    private void OnRaiseTile(TileData tileData, int previousHeight, int newHeight)
     {
         Debug.Log("Raising tile " + _tileData.tileType + " by " + (newHeight - previousHeight));
         for (int i = previousHeight; i < newHeight; i++)
