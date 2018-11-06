@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class TileData
 {
@@ -30,6 +31,10 @@ public class TileData
 
     public void RaiseTile()
     {
+        if (amountToRaiseTile == 0)
+        {
+            return;
+        }
         RaiseTileEvent?.Invoke(tileLevel, tileLevel + amountToRaiseTile);
         tileLevel += amountToRaiseTile;
         amountToRaiseTile = 0;

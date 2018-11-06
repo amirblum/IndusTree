@@ -58,7 +58,7 @@ public class BoardData
                 var pos = new BoardPos { x = i, y = j };
                 var tileData = new TileData();
 
-                if (i == boardSize / 2 + 1 && j == boardSize / 2 + 1)
+                if (i == 3 && j == 0)
                 {
                     tileData.tileType = TileData.TileType.Organic;
                 }
@@ -88,24 +88,29 @@ public class BoardData
 
         // Check the quads.
         var quads = GetQuads(newTilePosition);
+        bool closedAQuad = false;
 
         foreach (var quad in quads)
         {
             if (QuadIsClosed(quad))
             {
+                Debug.Log("Closing a quad");
                 // Raise the quad
                 foreach (var tile in quad)
                 {
                     tile.amountToRaiseTile++;
                 }
+                closedAQuad = true;
             }
         }
-
-        var niner = GetNiner(newTilePosition);
-
-        foreach (var tile in niner)
+        if (closedAQuad) 
         {
-            tile.RaiseTile();    
+            var niner = GetNiner(newTilePosition);
+
+            foreach (var tile in niner)
+            {
+                tile.RaiseTile();
+            }
         }
     }
 

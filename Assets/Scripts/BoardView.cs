@@ -45,6 +45,7 @@ public class BoardView : MonoBehaviour
 
         // In with the new!
         var newTile = Instantiate(GetTileFromData(tileData));
+        newTile.SetTileData(tileData);
 
         newTile.transform.position = GetUnityPos(pos);
 
