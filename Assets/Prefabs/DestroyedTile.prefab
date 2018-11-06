@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &6567915604824414631
+--- !u!1001 &6357264314401459416
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -65,47 +65,12 @@ PrefabInstance:
     - target: {fileID: 3108774395220310727, guid: 7350e7555d44a4ca0a19757602062a8b,
         type: 3}
       propertyPath: m_Name
-      value: OrganicTile
-      objectReference: {fileID: 0}
-    - target: {fileID: 7800086469979088609, guid: 7350e7555d44a4ca0a19757602062a8b,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
-    - target: {fileID: 5608834452768092391, guid: 7350e7555d44a4ca0a19757602062a8b,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.2
+      value: DestroyedTile
       objectReference: {fileID: 0}
     - target: {fileID: 2695825998278427380, guid: 7350e7555d44a4ca0a19757602062a8b,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4d1d767a8bf724f409a0f1015a71fdc2, type: 2}
-    - target: {fileID: 616626625511098610, guid: 7350e7555d44a4ca0a19757602062a8b,
-        type: 3}
-      propertyPath: tileWidth
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 616626625511098610, guid: 7350e7555d44a4ca0a19757602062a8b,
-        type: 3}
-      propertyPath: tileHeight
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5608834452768092391, guid: 7350e7555d44a4ca0a19757602062a8b,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5608834452768092391, guid: 7350e7555d44a4ca0a19757602062a8b,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5608834452768092391, guid: 7350e7555d44a4ca0a19757602062a8b,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2100000, guid: ea68892e28eaf4bbd989c287951d85d5, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7350e7555d44a4ca0a19757602062a8b, type: 3}
