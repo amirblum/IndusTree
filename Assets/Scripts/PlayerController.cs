@@ -69,13 +69,13 @@ public class PlayerController : MonoBehaviour
         return GetTile(_boardPosition);
     }
 
-    public void SetTileToPlayerType ()
+    public void SetTileToPlayerType (BoardData.BoardPos pos)
     {
         if (Input.GetKeyDown(PlayerInputs.PlaceTile))
             {
                 if (GetCurrentTile().tileType == TileData.TileType.Empty)
                 {
-                    BoardData.Instance.PlaceTile(PlayerTileType, _boardPosition);
+                    BoardData.Instance.PlaceTile(PlayerTileType, pos);
                 }
                 else
                 {
@@ -83,6 +83,11 @@ public class PlayerController : MonoBehaviour
                     Debug.Log("Tile Not Empty! Current tile type is :" + GetCurrentTile().tileType);
                 }
             }
+    }
+
+    public void SetCurrentTileToPlayerType ()
+    {
+        SetTileToPlayerType(_boardPosition);
     }
 
     public bool FindIfNearbyTilesAreBuilt (BoardData.BoardPos pos)
@@ -106,7 +111,15 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
-    
+    public void OrganicExpand (BoardData.BoardPos pos)
+    {
+        bool canExpand = true;
+        BoardData.BoardPos[] tiles = new BoardData.BoardPos[4] { _boardPosition.Up(), _boardPosition.Down(), _boardPosition.Left(), _boardPosition.Right() };
+        foreach (BoardData.BoardPos tile in tiles)
+        {
+            SetTileToPlayerType(tile);
+        }
+    }
 
     protected void Awake()
     {
@@ -133,8 +146,8 @@ public class PlayerController : MonoBehaviour
     {
         PlayerMovement();
         if (FindIfNearbyTilesAreBuilt(_boardPosition))
-        { 
-            SetTileToPlayerType();
+        {
+            SetCurrentTileToPlayerType();
         }
     }
 
