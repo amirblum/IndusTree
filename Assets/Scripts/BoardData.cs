@@ -68,7 +68,8 @@ public class BoardData
 
     public void PlaceTile(TileData tile, BoardPos position)
     {
-        Debug.Assert(_board[position.x, position.y].tileType == TileData.TileType.Empty, 
+        Debug.Assert(_board[position.x, position.y] == null ||
+        _board[position.x, position.y].tileType == TileData.TileType.Empty, 
             "Trying to place tile on non-empty spot!");
 
         _board[position.x, position.y] = tile;
