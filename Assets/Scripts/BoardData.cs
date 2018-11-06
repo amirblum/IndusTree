@@ -9,6 +9,23 @@ public class BoardData
     {
         public int x;
         public int y;
+        
+        public BoardPos Up()
+        {
+            return new BoardPos { x = this.x, y = this.y + 1 };
+        }
+        public BoardPos Down()
+        {
+            return new BoardPos { x = this.x, y = this.y -1 };
+        }
+        public BoardPos Left()
+        {
+            return new BoardPos { x = this.x - 1 , y = this.y };
+        }
+        public BoardPos Right()
+        {
+            return new BoardPos { x = this.x + 1, y = this.y };
+        }
     }
 
     // Public interface
