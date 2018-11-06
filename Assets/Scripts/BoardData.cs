@@ -55,6 +55,10 @@ public class BoardData
             for (int j = 0; j < BoardSize; j++)
             {
                 var pos = new BoardPos { x = i, y = j };
+                if (i == 10 && j == boardSize / 2 + 1)
+                {
+                    PlaceTile(TileData.TileType.Organic, pos);
+                }
                 PlaceTile(TileData.TileType.Empty, pos);
             }
         }

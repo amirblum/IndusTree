@@ -56,28 +56,56 @@ public class PlayerController : MonoBehaviour
         transform.position = BoardView.Instance.GetUnityPos(_boardPosition);
         
     }
-         
 
-    public TileData GetTile ()
+
+    public TileData GetTile(BoardData.BoardPos pos)
     {
-        return BoardData.Instance.GetTile(_boardPosition);
+        return BoardData.Instance.GetTile(pos);
+    }
+
+
+    public TileData GetCurrentTile ()
+    {
+        return GetTile(_boardPosition);
     }
 
     public void SetTileToPlayerType ()
     {
         if (Input.GetKeyDown(PlayerInputs.PlaceTile))
             {
-                if (GetTile().tileType == TileData.TileType.Empty)
+                if (GetCurrentTile().tileType == TileData.TileType.Empty)
                 {
                     BoardData.Instance.PlaceTile(PlayerTileType, _boardPosition);
                 }
                 else
                 {
                     //In case we add a time counter for placing a tile, do not "spend" the tile placement token (I.E lock placement)
-                    Debug.Log("Tile Not Empty! Current tile type is :" + GetTile().tileType);
+                    Debug.Log("Tile Not Empty! Current tile type is :" + GetCurrentTile().tileType);
                 }
             }
     }
+
+    public bool FindIfNearbyTilesAreBuilt (BoardData.BoardPos pos)
+    {
+        if (GetTile(pos.Up()).tileType == TileData.TileType.Mechanic || GetTile(pos.Up()).tileType == TileData.TileType.Organic )
+        {
+            return true;
+        }
+        if (GetTile(pos.Down()).tileType == TileData.TileType.Mechanic || GetTile(pos.Down()).tileType == TileData.TileType.Organic)
+        {
+            return true;
+        }
+        if (GetTile(pos.Left()).tileType == TileData.TileType.Mechanic || GetTile(pos.Left()).tileType == TileData.TileType.Organic)
+        {
+            return true;
+        }
+        if (GetTile(pos.Right()).tileType == TileData.TileType.Mechanic || GetTile(pos.Right()).tileType == TileData.TileType.Organic)
+        {
+            return true;
+        }
+        return false;
+    }
+
     
 
     protected void Awake()
@@ -104,7 +132,10 @@ public class PlayerController : MonoBehaviour
     protected void Update()
     {
         PlayerMovement();
-        SetTileToPlayerType();
+        if (FindIfNearbyTilesAreBuilt(_boardPosition))
+        { 
+            SetTileToPlayerType();
+        }
     }
 
 }
