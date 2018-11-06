@@ -1,8 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class Tile : MonoBehaviour
+public class TileData
 {
     public enum TileType
     {
@@ -12,4 +11,9 @@ public class Tile : MonoBehaviour
     }
 
     public TileType tileType;
+
+    public TileData()
+    {
+        tileType = TileType.Empty;
+    }
 }
