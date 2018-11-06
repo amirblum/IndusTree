@@ -56,7 +56,10 @@ public class BoardData
             for (int j = 0; j < BoardSize; j++)
             {
                 var pos = new BoardPos { x = i, y = j };
-                PlaceTile(TileData.TileType.Empty, pos);
+                var emptyTile = new TileData();
+
+                _board[i, j] = new TileData();
+                OnPlacedTileEvent?.Invoke(emptyTile, pos);
             }
         }
     }
@@ -106,9 +109,9 @@ public class BoardData
     {
         var quads = new TileData[4][];
         quads[0] = GetQuad(newTilePos);
-        quads[0] = GetQuad(newTilePos.Left());
-        quads[0] = GetQuad(newTilePos.Left().Down());
-        quads[0] = GetQuad(newTilePos.Down());
+        quads[1] = GetQuad(newTilePos.Left());
+        quads[2] = GetQuad(newTilePos.Left().Down());
+        quads[3] = GetQuad(newTilePos.Down());
         return quads;
     }
 

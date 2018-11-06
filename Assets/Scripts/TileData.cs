@@ -6,10 +6,10 @@ public class TileData
 {
     public enum TileType
     {
-        Empty,
-        Organic,
-        Mechanic,
-        OutOfBounds
+        OutOfBounds = -2,
+        Empty = -1,
+        Organic = 0,
+        Mechanic = 1
     }
 
     public TileType tileType;

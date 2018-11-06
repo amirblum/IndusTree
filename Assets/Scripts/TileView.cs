@@ -12,7 +12,7 @@ public class TileView : MonoBehaviour
     protected void Awake()
     {
         _models = new List<GameObject>();
-        _models[0] = GetComponentInChildren<MeshFilter>().gameObject;
+        _models.Add(GetComponentInChildren<MeshRenderer>().gameObject);
     }
     
     private TileData _tileData;
@@ -24,6 +24,7 @@ public class TileView : MonoBehaviour
 
     private void OnRaiseTile(int previousHeight, int newHeight)
     {
+        Debug.Log("Raising tile by " + (newHeight - previousHeight));
         // for 
         // _models
     }
