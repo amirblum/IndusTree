@@ -19,13 +19,19 @@ public class TileView : MonoBehaviour
     public void SetTileData(TileData tileData)
     {
         _tileData = tileData;
-        // _tileData.RaiseTileEvent += OnRaiseTile;
+        _tileData.RaiseTileEvent += OnRaiseTile;
     }
 
     private void OnRaiseTile(int previousHeight, int newHeight)
     {
-        Debug.Log("Raising tile by " + (newHeight - previousHeight));
-        // for 
-        // _models
+        Debug.Log("Raising tile " + _tileData.tileType + " by " + (newHeight - previousHeight));
+        for (int i = previousHeight; i < newHeight; i++)
+        {
+            var newModel = Instantiate(_models[0]);
+            var originalPos = _models[0].transform.position;
+            newModel.transform.position = new Vector3(originalPos.x, originalPos.y + tileHeight * (i + 1), originalPos.z);
+            _models.Add(newModel);
+            
+        }
     }
 }
