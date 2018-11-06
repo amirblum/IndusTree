@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class BoardView : MonoBehaviour
 {
+    public static BoardView Instance;
     [SerializeField] int _boardSize;
     [SerializeField] TileView _emptyTile;
     [SerializeField] TileView[] _playerTiles;
+    private TileView[,] _placedTiles;
     private BoardData _boardData;
     private MeshFilter _boardModel;
     private float _boardUnitySize;
@@ -14,23 +16,39 @@ public class BoardView : MonoBehaviour
     
     protected void Awake()
     {
+        Instance = this;
+        
         _boardModel = GetComponentInChildren<MeshFilter>();
         _boardUnitySize = _boardModel.mesh.bounds.size.x * _boardModel.transform.localScale.x;
         _tileUnitySize = _boardUnitySize / _boardSize;
+
+        _placedTiles = new TileView[_boardSize, _boardSize];
 
         _boardData = new BoardData();
         _boardData.OnPlacedTileEvent += OnPlacedTile;
         _boardData.InitializeBoard(_boardSize, _playerTiles.Length);
     }
 
-    private void OnPlacedTile(TileData tileData, BoardData.BoardPos pos)
+    public Vector3 GetUnityPos(BoardData.BoardPos pos)
     {
-        var tile = Instantiate(GetTileFromData(tileData));
-
-        tile.transform.position = new Vector3(
+        return new Vector3(
             _tileUnitySize / 2 + pos.x * _tileUnitySize,
             0,
             _tileUnitySize / 2 + pos.y * _tileUnitySize);
+    }
+
+    private void OnPlacedTile(TileData tileData, BoardData.BoardPos pos)
+    {
+        // Out with the old!
+        var currentTile = _placedTiles[pos.x, pos.y];
+        Destroy(currentTile);
+
+        // In with the new!
+        var newTile = Instantiate(GetTileFromData(tileData));
+
+        newTile.transform.position = GetUnityPos(pos);
+
+        _placedTiles[pos.x, pos.y] = newTile;
     }
 
     private TileView GetTileFromData(TileData tileData)

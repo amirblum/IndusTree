@@ -434,6 +434,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2376622805621286543, guid: c02a658579f964c6e8a88c8d3dac29b7,
+        type: 3}
+      propertyPath: _playerTiles.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7106856917643227746, guid: c02a658579f964c6e8a88c8d3dac29b7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -497,13 +502,25 @@ PrefabInstance:
     - target: {fileID: 2376622805621286543, guid: c02a658579f964c6e8a88c8d3dac29b7,
         type: 3}
       propertyPath: _boardSize
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2376622805621286543, guid: c02a658579f964c6e8a88c8d3dac29b7,
         type: 3}
       propertyPath: _emptyTile
       value: 
       objectReference: {fileID: 8217550985592237431, guid: b2cf4164ef3b14e54a2207b5125b4055,
+        type: 3}
+    - target: {fileID: 2376622805621286543, guid: c02a658579f964c6e8a88c8d3dac29b7,
+        type: 3}
+      propertyPath: _playerTiles.Array.data[0]
+      value: 
+      objectReference: {fileID: 6029016806376526165, guid: e9938f0c77b324277ae0908b78833e0f,
+        type: 3}
+    - target: {fileID: 2376622805621286543, guid: c02a658579f964c6e8a88c8d3dac29b7,
+        type: 3}
+      propertyPath: _playerTiles.Array.data[1]
+      value: 
+      objectReference: {fileID: 2608004105349261103, guid: a6a6b1d8911e84b288b49dda2c403576,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c02a658579f964c6e8a88c8d3dac29b7, type: 3}
