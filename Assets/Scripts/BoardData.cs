@@ -55,10 +55,8 @@ public class BoardData
         {
             for (int j = 0; j < BoardSize; j++)
             {
-                var tile = new TileData();
                 var pos = new BoardPos { x = i, y = j };
-                _board[pos.x, pos.y] = tile;
-                OnPlacedTileEvent?.Invoke(tile, pos);
+                PlaceTile(TileData.TileType.Empty, pos);
             }
         }
     }
@@ -71,12 +69,13 @@ public class BoardData
         return _board[position.x, position.y];
     }
 
-    public void PlaceTile(TileData newTile, BoardPos newTilePosition)
+    public void PlaceTile(TileData.TileType newTileType, BoardPos newTilePosition)
     {
         Debug.Assert(_board[newTilePosition.x, newTilePosition.y].tileType == TileData.TileType.Empty,
             "Trying to place tile on non-empty spot!");
 
         // Place the tile on the board.
+        var newTile = new TileData(newTileType);
         _board[newTilePosition.x, newTilePosition.y] = newTile;
         OnPlacedTileEvent?.Invoke(newTile, newTilePosition);
 
