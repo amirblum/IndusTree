@@ -7,7 +7,7 @@ public class BoardView : MonoBehaviour
 {
     public static BoardView Instance;
     [SerializeField] int _boardSize;
-    [SerializeField] Vector2[] _startingTiles;
+    [SerializeField] BoardData.BoardPos[] _startingTiles;
     [SerializeField] TileView _emptyTile;
     [SerializeField] TileView _destroyedTile;
     [SerializeField] TileView[] _playerTiles;
