@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class BoardView : MonoBehaviour
@@ -43,6 +44,14 @@ public class BoardView : MonoBehaviour
         _boardData.InitializeBoard(_boardSize, _startingTiles, _winCondition);
 
         UpdateScoreTexts();
+    }
+
+    protected void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            SceneManager.LoadScene("Main");
+        }
     }
 
     private void OnGameOver(int winner)
