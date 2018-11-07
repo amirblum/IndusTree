@@ -24,7 +24,11 @@ public class TileView : MonoBehaviour
 
     private void OnRaiseTile(TileData tileData, int previousHeight, int newHeight)
     {
-        Debug.Log("Raising tile " + this.tileData.tileType + " by " + (newHeight - previousHeight));
+        if (newHeight <= 0)
+        {
+            return;
+        }
+        
         for (int i = previousHeight; i < newHeight; i++)
         {
             var newModel = Instantiate(_models[0]);

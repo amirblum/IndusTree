@@ -257,7 +257,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
   m_LocalRotation: {x: 0.2164396, y: 0, z: 0, w: 0.97629607}
-  m_LocalPosition: {x: 25, y: 12.92, z: -13.64}
+  m_LocalPosition: {x: 15, y: 13, z: -13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -299,6 +299,7 @@ MonoBehaviour:
     left: 97
     right: 100
     PlaceTile: 107
+    SpecialAbility: 0
 --- !u!4 &755998918
 Transform:
   m_ObjectHideFlags: 0
@@ -856,6 +857,7 @@ MonoBehaviour:
     left: 276
     right: 275
     PlaceTile: 303
+    SpecialAbility: 0
 --- !u!4 &1989581586
 Transform:
   m_ObjectHideFlags: 0
@@ -981,5 +983,11 @@ PrefabInstance:
       propertyPath: _playerScoresText.Array.data[1]
       value: 
       objectReference: {fileID: 803926067}
+    - target: {fileID: 2376622805621286543, guid: c02a658579f964c6e8a88c8d3dac29b7,
+        type: 3}
+      propertyPath: _destroyedTile
+      value: 
+      objectReference: {fileID: 5816179635696272426, guid: 4e225ab5475af4650a64474e9984c39a,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c02a658579f964c6e8a88c8d3dac29b7, type: 3}

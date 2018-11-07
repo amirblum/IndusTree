@@ -48,4 +48,9 @@ public class TileData
         tileLevel += amountToRaiseTile;
         amountToRaiseTile = 0;
     }
+
+    internal void DestroyTile()
+    {
+        RaiseTileEvent?.Invoke(this, tileLevel, 0);
+    }
 }
