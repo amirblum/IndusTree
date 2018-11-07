@@ -34,10 +34,12 @@ public class BoardData
     public int NumOfPlayers { get; private set; }
     public static BoardData Instance { get; private set; }
     public int[] PlayerScores { get; set; }
+    public int FilledTiles { get; set; }
 
     // Public events
     public event Action<TileData, BoardPos> OnPlacedTileEvent;
     public event Action OnScoreUpdatedEvent;
+    public event Action<int> OnGameOverEvent;
 
     // Private variables
     private TileData[,] _board;
@@ -107,6 +109,11 @@ public class BoardData
 
         UpdateScore((int)newTileType, 1);
 
+        if (newTileType != TileData.TileType.Organic && newTileType != TileData.TileType.Mechanic)
+        {
+            return;
+        }
+
         // Check the quads.
         var quads = GetQuads(newTilePosition);
         bool closedAQuad = false;
@@ -150,6 +157,24 @@ public class BoardData
                 tile.DestroyTile();
                 PlaceTile(TileData.TileType.Destroyed, tile.boardPos);
             }
+        }
+
+        // Check win condition.
+        FilledTiles++;
+
+        if (FilledTiles >= BoardSize)
+        {
+            Debug.Log("End game!");
+            var winner = -1;
+            if (PlayerScores[0] > PlayerScores[1])
+            {
+                winner = 0;
+            }
+            else if (PlayerScores[1] > PlayerScores[0])
+            {
+                winner = 1;
+            }
+            OnGameOverEvent?.Invoke(winner);
         }
     }
 

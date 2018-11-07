@@ -11,6 +11,8 @@ public class BoardView : MonoBehaviour
     [SerializeField] TileView _emptyTile;
     [SerializeField] TileView _destroyedTile;
     [SerializeField] TileView[] _playerTiles;
+    [Header("UI")]
+    [SerializeField] GameObject[] _playerWinMessages;
     [SerializeField] Text[] _playerScoresText;
 
     [Header("Sound effects")]
@@ -26,7 +28,7 @@ public class BoardView : MonoBehaviour
     protected void Awake()
     {
         Instance = this;
-        
+
         _boardModel = GetComponentInChildren<MeshFilter>();
         _boardUnitySize = _boardModel.mesh.bounds.size.x * _boardModel.transform.localScale.x;
         _tileUnitySize = _boardUnitySize / _boardSize;
@@ -36,9 +38,15 @@ public class BoardView : MonoBehaviour
         _boardData = new BoardData();
         _boardData.OnPlacedTileEvent += OnPlacedTile;
         _boardData.OnScoreUpdatedEvent += UpdateScoreTexts;
+        _boardData.OnGameOverEvent += OnGameOver;
         _boardData.InitializeBoard(_boardSize, _startingTiles);
 
         UpdateScoreTexts();
+    }
+
+    private void OnGameOver(int winner)
+    {
+        _playerWinMessages[winner].SetActive(true);
     }
 
     private void UpdateScoreTexts()
