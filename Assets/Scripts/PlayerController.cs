@@ -251,7 +251,7 @@ public class PlayerController : MonoBehaviour
                 {
                     SetCurrentTileToPlayerType();
                     IsPlacementLocked = true;
-                    Debug.Log("I tried to lock the placemernt lock");
+                    // Debug.Log("I tried to lock the placemernt lock");
 
                     StartCoroutine(_coolDownManager.StartCooldDown());
                 }
@@ -259,7 +259,6 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-        Debug.Log("placement lock is :" + IsPlacementLocked);
 
     }
 

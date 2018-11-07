@@ -7,12 +7,11 @@ public class BoardView : MonoBehaviour
 {
     public static BoardView Instance;
     [SerializeField] int _boardSize;
-    [SerializeField] Vector2[] _startingTiles;
+    [SerializeField] BoardData.BoardPos[] _startingTiles;
     [SerializeField] TileView _emptyTile;
     [SerializeField] TileView _destroyedTile;
     [SerializeField] TileView[] _playerTiles;
     [SerializeField] Text[] _playerScoresText;
-    private int[] _playerScores;
     private TileView[,] _placedTiles;
     private BoardData _boardData;
     private MeshFilter _boardModel;
@@ -31,11 +30,16 @@ public class BoardView : MonoBehaviour
 
         _boardData = new BoardData();
         _boardData.OnPlacedTileEvent += OnPlacedTile;
+        _boardData.OnScoreUpdatedEvent += UpdateScoreTexts;
         _boardData.InitializeBoard(_boardSize, _startingTiles);
 
-        _playerScores = new int[2];
-        SetScoreText(0,0);
-        SetScoreText(1,0);
+        UpdateScoreTexts();
+    }
+
+    private void UpdateScoreTexts()
+    {
+        SetScoreText(0, _boardData.PlayerScores[0]);
+        SetScoreText(1, _boardData.PlayerScores[1]);
     }
 
     public Vector3 GetUnityPos(BoardData.BoardPos pos)
@@ -73,8 +77,6 @@ public class BoardView : MonoBehaviour
         }
 
         int player = (int)tileData.tileType;
-        _playerScores[player] += newHeight - previousHeight;
-        SetScoreText(player, _playerScores[player]);
     }
 
     private void SetScoreText(int player, int score)

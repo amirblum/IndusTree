@@ -35,14 +35,6 @@ public class TileView : MonoBehaviour
         {
             return;
         }
-
-        // for (int i = previousHeight; i < newHeight; i++)
-        // {
-            // var newModel = Instantiate(_models[0]);
-            // var originalPos = _models[0].transform.position;
-            // newModel.transform.position = new Vector3(originalPos.x, originalPos.y + tileHeight * (i + 1), originalPos.z);
-            // _models.Add(newModel);
-        // }
         
         levels[previousHeight].SetActive(false);
         levels[newHeight].SetActive(true);
