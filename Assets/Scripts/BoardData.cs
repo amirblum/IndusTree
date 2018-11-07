@@ -32,6 +32,7 @@ public class BoardData
     // Public interface
     public int BoardSize { get; private set; }
     public int NumOfPlayers { get; private set; }
+    public int WinCondition { get; set; }
     public static BoardData Instance { get; private set; }
     public int[] PlayerScores { get; set; }
     public int FilledTiles { get; set; }
@@ -50,10 +51,11 @@ public class BoardData
         Instance = this;
     }
 
-    public void InitializeBoard(int boardSize, BoardPos[] startingTiles)
+    public void InitializeBoard(int boardSize, BoardPos[] startingTiles, int winCondition)
     {
         BoardSize = boardSize;
         NumOfPlayers = startingTiles.Length;
+        WinCondition = winCondition;
 
         _board = new TileData[BoardSize, BoardSize];
         for (int i = 0; i < BoardSize; i++)
@@ -160,22 +162,36 @@ public class BoardData
         }
 
         // Check win condition.
-        FilledTiles++;
-
-        if (FilledTiles >= BoardSize)
+        if (PlayerScores[0] >= WinCondition && PlayerScores[1] < WinCondition)
         {
-            Debug.Log("End game!");
-            var winner = -1;
-            if (PlayerScores[0] > PlayerScores[1])
-            {
-                winner = 0;
-            }
-            else if (PlayerScores[1] > PlayerScores[0])
-            {
-                winner = 1;
-            }
-            OnGameOverEvent?.Invoke(winner);
+            OnGameOverEvent?.Invoke(0);
         }
+        else if (PlayerScores[1] >= WinCondition && PlayerScores[0] < WinCondition)
+        {
+            OnGameOverEvent?.Invoke(1);
+        }
+        else if (PlayerScores[0] >= WinCondition && PlayerScores[1] >= WinCondition)
+        {
+            Debug.Log("OMG you tied!");
+        }
+
+
+        // FilledTiles++;
+
+        // if (FilledTiles >= BoardSize * BoardSize)
+        // {
+        //     Debug.Log("End game!");
+        //     var winner = -1;
+        //     if (PlayerScores[0] > PlayerScores[1])
+        //     {
+        //         winner = 0;
+        //     }
+        //     else if (PlayerScores[1] > PlayerScores[0])
+        //     {
+        //         winner = 1;
+        //     }
+        //     OnGameOverEvent?.Invoke(winner);
+        // }
     }
 
     private TileData[][] GetQuads(BoardPos newTilePos)

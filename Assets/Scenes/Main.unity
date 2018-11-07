@@ -181,6 +181,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!82 &284007885 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6664239022934029508, guid: 927202c21df95477c9a6063ed6e47252,
+    type: 3}
+  m_PrefabInstance: {fileID: 9092811323197988002}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &420922370
 GameObject:
   m_ObjectHideFlags: 0
@@ -737,6 +743,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 833117557}
   m_CullTransparentMesh: 0
+--- !u!82 &1004116075 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 9191210964984832294, guid: 927202c21df95477c9a6063ed6e47252,
+    type: 3}
+  m_PrefabInstance: {fileID: 9092811323197988002}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1035075542
 GameObject:
   m_ObjectHideFlags: 0
@@ -923,6 +935,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f89530ea11660194ca1cb68b3692e90c, type: 2}
+    - target: {fileID: 8706118504088861913, guid: b051998206f2e98419e334d52dd78f80,
+        type: 3}
+      propertyPath: _badMoveSound
+      value: 
+      objectReference: {fileID: 8300000, guid: ce2ab67628c2e4be097fbcf3abcff282, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b051998206f2e98419e334d52dd78f80, type: 3}
 --- !u!1 &1143026175
@@ -1384,6 +1401,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1908168172}
   m_CullTransparentMesh: 0
+--- !u!82 &1912938117 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 5054593532879648335, guid: 927202c21df95477c9a6063ed6e47252,
+    type: 3}
+  m_PrefabInstance: {fileID: 9092811323197988002}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1953192361 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8706118504088861912, guid: b051998206f2e98419e334d52dd78f80,
@@ -1737,6 +1760,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerOne
       objectReference: {fileID: 0}
+    - target: {fileID: 8706118504088861913, guid: b051998206f2e98419e334d52dd78f80,
+        type: 3}
+      propertyPath: _badMoveSound
+      value: 
+      objectReference: {fileID: 8300000, guid: ce2ab67628c2e4be097fbcf3abcff282, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b051998206f2e98419e334d52dd78f80, type: 3}
 --- !u!1001 &9092811323197988002
@@ -1746,6 +1774,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 534669905}
     m_Modifications:
+    - target: {fileID: 6078768834044810549, guid: 927202c21df95477c9a6063ed6e47252,
+        type: 3}
+      propertyPath: winnerMusic.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4059559870157159247, guid: 927202c21df95477c9a6063ed6e47252,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1811,5 +1844,30 @@ PrefabInstance:
       propertyPath: m_Volume
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6078768834044810549, guid: 927202c21df95477c9a6063ed6e47252,
+        type: 3}
+      propertyPath: _baselineMusic
+      value: 
+      objectReference: {fileID: 284007885}
+    - target: {fileID: 9191210964984832294, guid: 927202c21df95477c9a6063ed6e47252,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: ca4379391d8ef46e39d4a49875369a71, type: 3}
+    - target: {fileID: 5054593532879648335, guid: 927202c21df95477c9a6063ed6e47252,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 94ce466a291494413864b537e517c50b, type: 3}
+    - target: {fileID: 6078768834044810549, guid: 927202c21df95477c9a6063ed6e47252,
+        type: 3}
+      propertyPath: winnerMusic.Array.data[0]
+      value: 
+      objectReference: {fileID: 1004116075}
+    - target: {fileID: 6078768834044810549, guid: 927202c21df95477c9a6063ed6e47252,
+        type: 3}
+      propertyPath: winnerMusic.Array.data[1]
+      value: 
+      objectReference: {fileID: 1912938117}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 927202c21df95477c9a6063ed6e47252, type: 3}

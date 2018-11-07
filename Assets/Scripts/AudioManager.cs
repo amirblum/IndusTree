@@ -1,11 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
     private AudioSource _sfxSource;
+    public AudioSource _baselineMusic;
     public AudioSource[] winningMusic;
+    public AudioSource[] winnerMusic;
     public static AudioManager Instance;
     protected void Awake()
     {
@@ -42,5 +45,13 @@ public class AudioManager : MonoBehaviour
             winningMusic[0].volume = 0;
             winningMusic[1].volume = 0;
         }
+    }
+
+    public void PlayWinner(int winner)
+    {
+        _baselineMusic.Stop();
+        winningMusic[0].Stop();
+        winningMusic[1].Stop();
+        winnerMusic[winner].Play();
     }
 }

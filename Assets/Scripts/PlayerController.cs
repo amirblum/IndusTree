@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     public float movementTime;
     private Coroutine _movementCoroutine;
 
+    public AudioClip _badMoveSound;
+
     [Serializable]
     public class PlayerInputStrings  {
 
@@ -106,7 +108,7 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     //In case we add a time counter for placing a tile, do not "spend" the tile placement token (I.E lock placement)
-                    Debug.Log("Tile Not Empty! Current tile type is :" + GetCurrentTile().tileType);
+                    AudioManager.Instance.PlaySfx(_badMoveSound);
                 }
             
     }
@@ -254,6 +256,10 @@ public class PlayerController : MonoBehaviour
                     // Debug.Log("I tried to lock the placemernt lock");
 
                     StartCoroutine(_coolDownManager.StartCooldDown());
+                }
+                else
+                {
+                    AudioManager.Instance.PlaySfx(_badMoveSound);
                 }
                 
             }

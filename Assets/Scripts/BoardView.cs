@@ -7,6 +7,7 @@ public class BoardView : MonoBehaviour
 {
     public static BoardView Instance;
     [SerializeField] int _boardSize;
+    [SerializeField] int _winCondition;
     [SerializeField] BoardData.BoardPos[] _startingTiles;
     [SerializeField] TileView _emptyTile;
     [SerializeField] TileView _destroyedTile;
@@ -39,7 +40,7 @@ public class BoardView : MonoBehaviour
         _boardData.OnPlacedTileEvent += OnPlacedTile;
         _boardData.OnScoreUpdatedEvent += UpdateScoreTexts;
         _boardData.OnGameOverEvent += OnGameOver;
-        _boardData.InitializeBoard(_boardSize, _startingTiles);
+        _boardData.InitializeBoard(_boardSize, _startingTiles, _winCondition);
 
         UpdateScoreTexts();
     }
@@ -47,6 +48,7 @@ public class BoardView : MonoBehaviour
     private void OnGameOver(int winner)
     {
         _playerWinMessages[winner].SetActive(true);
+        AudioManager.Instance.PlayWinner(winner);
     }
 
     private void UpdateScoreTexts()
