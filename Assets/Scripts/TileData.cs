@@ -40,10 +40,6 @@ public class TileData
 
     public void RaiseTile()
     {
-        if (amountToRaiseTile == 0)
-        {
-            return;
-        }
         int newLevel = tileLevel + amountToRaiseTile;
         newLevel = Mathf.Min(newLevel, 2);
         RaiseTileEvent?.Invoke(this, tileLevel, newLevel);

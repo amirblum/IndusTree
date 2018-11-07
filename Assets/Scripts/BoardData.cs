@@ -33,9 +33,11 @@ public class BoardData
     public int BoardSize { get; private set; }
     public int NumOfPlayers { get; private set; }
     public static BoardData Instance { get; private set; }
+    public int[] PlayerScores { get; set; }
 
     // Public events
     public event Action<TileData, BoardPos> OnPlacedTileEvent;
+    public event Action OnScoreUpdatedEvent;
 
     // Private variables
     private TileData[,] _board;
@@ -70,6 +72,8 @@ public class BoardData
                 OnPlacedTileEvent?.Invoke(tileData, pos);
             }
         }
+
+        PlayerScores = new int[] {1, 1};
     }
     public TileData GetTile(BoardPos position)
     {
@@ -78,6 +82,16 @@ public class BoardData
             return _outOfBoundsTile;
         }
         return _board[position.x, position.y];
+    }
+
+    private void UpdateScore(int player, int scoreToAdd)
+    {
+        if (player < 0 || player >= PlayerScores.Length)
+        {
+            return;
+        }
+        PlayerScores[player] += scoreToAdd;
+        OnScoreUpdatedEvent?.Invoke();
     }
 
     public void PlaceTile(TileData.TileType newTileType, BoardPos newTilePosition)
@@ -90,6 +104,8 @@ public class BoardData
         var newTile = new TileData(newTileType, newTilePosition);
         _board[newTilePosition.x, newTilePosition.y] = newTile;
         OnPlacedTileEvent?.Invoke(newTile, newTilePosition);
+
+        UpdateScore((int)newTileType, 1);
 
         // Check the quads.
         var quads = GetQuads(newTilePosition);
@@ -119,13 +135,18 @@ public class BoardData
 
             foreach (var tile in niner)
             {
-                tile.RaiseTile();
+                if (tile.amountToRaiseTile > 0)
+                {
+                    tile.RaiseTile();
+                    UpdateScore((int)tile.tileType, 1);
+                }
             }
         }
         foreach (var destroyedQuad in destroyedQuads)
         {            
             foreach (var tile in destroyedQuad)
             {
+                UpdateScore((int)tile.tileType, tile.tileLevel);
                 tile.DestroyTile();
                 PlaceTile(TileData.TileType.Destroyed, tile.boardPos);
             }
