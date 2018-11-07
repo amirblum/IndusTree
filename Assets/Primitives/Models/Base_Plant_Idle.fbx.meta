@@ -1,53 +1,58 @@
 fileFormatVersion: 2
-guid: 7cbb783428d2a8a48ab8506ab379d5d6
+guid: 80b65eea5774f45cca775dd9062547ea
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: Cylinder.017
-    100002: Cylinder.018
-    100004: Cylinder.020
-    100006: Cylinder.021
-    100008: Cylinder.023
-    100010: //RootNode
-    100012: Cylinder.016
-    100014: Cylinder.022
-    100016: Cylinder.025
-    400000: Cylinder.017
-    400002: Cylinder.018
-    400004: Cylinder.020
-    400006: Cylinder.021
-    400008: Cylinder.023
-    400010: //RootNode
-    400012: Cylinder.016
-    400014: Cylinder.022
-    400016: Cylinder.025
-    2100000: No Name
-    2100002: Material.003
-    2100004: Material.005
-    2300000: Cylinder.017
-    2300002: Cylinder.018
-    2300004: Cylinder.020
-    2300006: Cylinder.021
-    2300008: Cylinder.023
-    2300010: Cylinder.016
-    2300012: Cylinder.022
-    2300014: Cylinder.025
-    3300000: Cylinder.017
-    3300002: Cylinder.018
-    3300004: Cylinder.020
-    3300006: Cylinder.021
-    3300008: Cylinder.023
-    3300010: Cylinder.016
-    3300012: Cylinder.022
-    3300014: Cylinder.025
-    4300000: Cylinder.021
-    4300002: Cylinder.020
-    4300004: Cylinder.018
-    4300006: Cylinder.017
-    4300008: Cylinder.023
-    4300010: Cylinder.025
-    4300012: Cylinder.022
-    4300014: Cylinder.016
+    100000: Base_01
+    100002: Base_01.001
+    100004: Base_01.001_end
+    100006: Base_01_end
+    100008: Base_02
+    100010: Base_03
+    100012: Base_04
+    100014: Base_05
+    100016: Base_06
+    100018: //RootNode
+    100020: Cylinder.026
+    100022: Cylinder.028
+    100024: Cylinder.029
+    100026: Cylinder.030
+    100028: Cylinder.034
+    100030: Cylinder.036
+    100032: Plant_Base
+    400000: Base_01
+    400002: Base_01.001
+    400004: Base_01.001_end
+    400006: Base_01_end
+    400008: Base_02
+    400010: Base_03
+    400012: Base_04
+    400014: Base_05
+    400016: Base_06
+    400018: //RootNode
+    400020: Cylinder.026
+    400022: Cylinder.028
+    400024: Cylinder.029
+    400026: Cylinder.030
+    400028: Cylinder.034
+    400030: Cylinder.036
+    400032: Plant_Base
+    2100000: Material.003
+    2100002: Material.005
+    4300000: Cylinder.036
+    4300002: Cylinder.034
+    4300004: Cylinder.030
+    4300006: Cylinder.029
+    4300008: Cylinder.028
+    4300010: Cylinder.026
+    7400000: Plant_Base|Plant_BaseAction
+    9500000: //RootNode
+    13700000: Cylinder.026
+    13700002: Cylinder.028
+    13700004: Cylinder.029
+    13700006: Cylinder.030
+    13700008: Cylinder.034
+    13700010: Cylinder.036
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -100,8 +105,8 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -128,7 +133,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

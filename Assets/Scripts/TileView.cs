@@ -6,13 +6,20 @@ public class TileView : MonoBehaviour
 {
     public float tileWidth;
     public float tileHeight;
+    public GameObject[] levels;
 
-    private List<GameObject> _models;
+    private MeshFilter _meshFilter;
+    private ParticleSystem _levelUpParticles;
+
+    // private List<GameObject> _models;
 
     protected void Awake()
     {
-        _models = new List<GameObject>();
-        _models.Add(GetComponentInChildren<MeshRenderer>().gameObject);
+    //     _models = new List<GameObject>();
+    //     _models.Add(GetComponentInChildren<MeshRenderer>().gameObject);
+
+        _meshFilter = GetComponentInChildren<MeshFilter>();
+        _levelUpParticles = GetComponentInChildren<ParticleSystem>();
     }
     
     public TileData tileData;
@@ -28,14 +35,17 @@ public class TileView : MonoBehaviour
         {
             return;
         }
+
+        // for (int i = previousHeight; i < newHeight; i++)
+        // {
+            // var newModel = Instantiate(_models[0]);
+            // var originalPos = _models[0].transform.position;
+            // newModel.transform.position = new Vector3(originalPos.x, originalPos.y + tileHeight * (i + 1), originalPos.z);
+            // _models.Add(newModel);
+        // }
         
-        for (int i = previousHeight; i < newHeight; i++)
-        {
-            var newModel = Instantiate(_models[0]);
-            var originalPos = _models[0].transform.position;
-            newModel.transform.position = new Vector3(originalPos.x, originalPos.y + tileHeight * (i + 1), originalPos.z);
-            _models.Add(newModel);
-            
-        }
+        levels[previousHeight].SetActive(false);
+        levels[newHeight].SetActive(true);
+        _levelUpParticles?.Play();
     }
 }
