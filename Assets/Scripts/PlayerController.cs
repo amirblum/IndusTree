@@ -92,8 +92,6 @@ public class PlayerController : MonoBehaviour
 
     public bool FindIfNearbyTilesAreBuilt (BoardData.BoardPos pos)
     {
-        Debug.Log("pos values :" + pos.x + pos.y);
-        Debug.Log("Tile Type: " + GetTile(pos).tileType);
         if (GetTile(pos.Up()).tileType == TileData.TileType.Mechanic || GetTile(pos.Up()).tileType == TileData.TileType.Organic)
         {
             return true;

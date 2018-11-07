@@ -51,8 +51,7 @@ public class BoardView : MonoBehaviour
         var currentTile = _placedTiles[pos.x, pos.y];
         if (currentTile != null)
         {
-            Debug.Log("Destroying " + currentTile.tileData.tileType);
-            Destroy(currentTile);
+            Destroy(currentTile.gameObject);
         }
 
         // In with the new!
