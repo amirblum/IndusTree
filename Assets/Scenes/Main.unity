@@ -725,6 +725,16 @@ PrefabInstance:
       propertyPath: _playerScoresText.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2376622805621286543, guid: c02a658579f964c6e8a88c8d3dac29b7,
+        type: 3}
+      propertyPath: _p1PlacementSounds.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2376622805621286543, guid: c02a658579f964c6e8a88c8d3dac29b7,
+        type: 3}
+      propertyPath: _p2PlacementSounds.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7106856917643227746, guid: c02a658579f964c6e8a88c8d3dac29b7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -844,6 +854,36 @@ PrefabInstance:
       propertyPath: _startingTiles.Array.data[1].y
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 2376622805621286543, guid: c02a658579f964c6e8a88c8d3dac29b7,
+        type: 3}
+      propertyPath: _p1PlacementSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 28add85b8117243d58a5ede79d91e387, type: 3}
+    - target: {fileID: 2376622805621286543, guid: c02a658579f964c6e8a88c8d3dac29b7,
+        type: 3}
+      propertyPath: _p1PlacementSounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: ef2bfa6aa358d458e95fc505f547820b, type: 3}
+    - target: {fileID: 2376622805621286543, guid: c02a658579f964c6e8a88c8d3dac29b7,
+        type: 3}
+      propertyPath: _p1PlacementSounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: b3d6b22d53170412aba2bf077ca5dbf0, type: 3}
+    - target: {fileID: 2376622805621286543, guid: c02a658579f964c6e8a88c8d3dac29b7,
+        type: 3}
+      propertyPath: _p2PlacementSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 5652cb7f6fe6749b6b0e9fc50922b5a2, type: 3}
+    - target: {fileID: 2376622805621286543, guid: c02a658579f964c6e8a88c8d3dac29b7,
+        type: 3}
+      propertyPath: _p2PlacementSounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 333a95752ab0948519fee292be6a1929, type: 3}
+    - target: {fileID: 2376622805621286543, guid: c02a658579f964c6e8a88c8d3dac29b7,
+        type: 3}
+      propertyPath: _p2PlacementSounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 1fc30a93d17d1419794307cc872b4aae, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c02a658579f964c6e8a88c8d3dac29b7, type: 3}
 --- !u!1001 &8706118506061326280
@@ -981,6 +1021,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AudioManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8242629892290064677, guid: 927202c21df95477c9a6063ed6e47252,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 927202c21df95477c9a6063ed6e47252, type: 3}

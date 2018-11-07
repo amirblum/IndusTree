@@ -12,6 +12,11 @@ public class BoardView : MonoBehaviour
     [SerializeField] TileView _destroyedTile;
     [SerializeField] TileView[] _playerTiles;
     [SerializeField] Text[] _playerScoresText;
+
+    [Header("Sound effects")]
+    [SerializeField] AudioClip[] _p1PlacementSounds;
+    [SerializeField] AudioClip[] _p2PlacementSounds;
+
     private TileView[,] _placedTiles;
     private BoardData _boardData;
     private MeshFilter _boardModel;
@@ -67,6 +72,18 @@ public class BoardView : MonoBehaviour
         newTile.transform.position = GetUnityPos(pos);
 
         _placedTiles[pos.x, pos.y] = newTile;
+
+        if (AudioManager.Instance == null)
+        {
+            return;
+        }
+
+        var tileType = tileData.tileType;
+        if (tileType == TileData.TileType.Organic || tileType == TileData.TileType.Mechanic)
+        {
+            var sounds = tileData.tileType == TileData.TileType.Organic ? _p1PlacementSounds : _p2PlacementSounds;
+            AudioManager.Instance.PlaySfx(sounds[Random.Range(0, sounds.Length)]);
+        }
     }
 
     private void OnRaisedTile(TileData tileData, int previousHeight, int newHeight)
