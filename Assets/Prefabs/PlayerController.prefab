@@ -152,7 +152,9 @@ MonoBehaviour:
     x: 0
     y: 0
   IsPlacementLocked: 0
+  PlayerCursor: {fileID: 8706118504006893510}
   movementTime: 0.05
+  _badMoveSound: {fileID: 8300000, guid: ce2ab67628c2e4be097fbcf3abcff282, type: 3}
 --- !u!114 &2537588564658085125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,6 +168,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CoolDownTimer: 1
+  PlayerCursorObject: {fileID: 0}
+  PlayerCursorRenderer: {fileID: 0}
+  EmissionFactor: 0
+  TargetColor: {r: 0, g: 0, b: 0, a: 0}
+  CountdownTimer: 0
+  CountDownTimerForColorLerp: 0
+  ClampdLerpedCountdown: 0
+  InitColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &8706118505306102825
 GameObject:
   m_ObjectHideFlags: 0
