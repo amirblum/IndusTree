@@ -44,8 +44,11 @@ public class TileData
         {
             return;
         }
-        RaiseTileEvent?.Invoke(this, tileLevel, tileLevel + amountToRaiseTile);
-        tileLevel += amountToRaiseTile;
+        int newLevel = tileLevel + amountToRaiseTile;
+        newLevel = Mathf.Min(newLevel, 2);
+        RaiseTileEvent?.Invoke(this, tileLevel, newLevel);
+        
+        tileLevel = newLevel;
         amountToRaiseTile = 0;
     }
 
