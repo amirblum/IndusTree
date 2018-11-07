@@ -11,7 +11,10 @@ public class PlayerController : MonoBehaviour
     public BoardData.BoardPos _boardPosition;
     public PlayerInputStrings PlayerInputs;
     private TileData _currentTile;
-    private BoardData.BoardPos InitBoardPos;
+    public BoardData.BoardPos InitBoardPos;
+    public bool IsPlacementLocked;
+    private CoolDownManager _coolDownManager;
+    
 
     
 
@@ -38,19 +41,19 @@ public class PlayerController : MonoBehaviour
     public void PlayerMovement ( )
     {   
 
-        if (Input.GetKeyDown(PlayerInputs.up) && _boardPosition.y < BoardData.Instance.BoardSize - 1 )
+        if (Input.GetKeyDown(PlayerInputs.up) && _boardPosition.y < BoardData.Instance.BoardSize - 1 && CanMoveToTile(_boardPosition.Up()) == true )
         {
             _boardPosition = _boardPosition.Up();
         }
-        if (Input.GetKeyDown(PlayerInputs.down) && _boardPosition.y > 0)
+        if (Input.GetKeyDown(PlayerInputs.down) && _boardPosition.y > 0 && CanMoveToTile(_boardPosition.Down()) == true)
         {
             _boardPosition = _boardPosition.Down();
         }
-        if (Input.GetKeyDown(PlayerInputs.left) && _boardPosition.x > 0)
+        if (Input.GetKeyDown(PlayerInputs.left) && _boardPosition.x > 0 && CanMoveToTile(_boardPosition.Left()) == true)
         {
             _boardPosition = _boardPosition.Left();
         }
-        if (Input.GetKeyDown(PlayerInputs.right) && _boardPosition.x < BoardData.Instance.BoardSize - 1 )
+        if (Input.GetKeyDown(PlayerInputs.right) && _boardPosition.x < BoardData.Instance.BoardSize - 1 && CanMoveToTile(_boardPosition.Right()) == true)
         {
             _boardPosition = _boardPosition.Right();
         }
@@ -108,6 +111,7 @@ public class PlayerController : MonoBehaviour
 
     public bool FindIfNearbyTilesAreBuilt (BoardData.BoardPos pos)
     {
+        
         if (GetTile(pos.Up()).tileType == TileData.TileType.Mechanic || GetTile(pos.Up()).tileType == TileData.TileType.Organic)
         {
             return true;
@@ -127,23 +131,68 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
+    public bool FindIfNearbyTilesAreBuiltOrDestroyed(BoardData.BoardPos pos)
+    {
+
+        if (GetTile(pos.Up()).tileType == TileData.TileType.Mechanic || GetTile(pos.Up()).tileType == TileData.TileType.Organic || GetTile(pos.Up()).tileType == TileData.TileType.Destroyed)
+        {
+            return true;
+        }
+        if (GetTile(pos.Down()).tileType == TileData.TileType.Mechanic || GetTile(pos.Down()).tileType == TileData.TileType.Organic || GetTile(pos.Down()).tileType == TileData.TileType.Destroyed)
+        {
+            return true;
+        }
+        if (GetTile(pos.Left()).tileType == TileData.TileType.Mechanic || GetTile(pos.Left()).tileType == TileData.TileType.Organic || GetTile(pos.Left()).tileType == TileData.TileType.Destroyed)
+        {
+            return true;
+        }
+        if (GetTile(pos.Right()).tileType == TileData.TileType.Mechanic || GetTile(pos.Right()).tileType == TileData.TileType.Organic || GetTile(pos.Right()).tileType == TileData.TileType.Destroyed)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public bool FindIfTargetTileIsValidToMove (BoardData.BoardPos pos)
+    {
+        if(GetTile(pos).tileType == TileData.TileType.Organic || GetTile(pos).tileType == TileData.TileType.Mechanic || GetTile(pos).tileType == TileData.TileType.Destroyed)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public bool CanMoveToTile (BoardData.BoardPos pos)
+    {
+        if (FindIfNearbyTilesAreBuiltOrDestroyed(pos) == true || FindIfTargetTileIsValidToMove(pos) == true)
+        {
+            return true;
+        }
+        return false;
+    }
+
     public void OrganicExpand (BoardData.BoardPos pos)
     {
-        bool canInvokeSpecialAbility = true;
-        BoardData.BoardPos[] tiles = new BoardData.BoardPos[4] { _boardPosition.Up(), _boardPosition.Down(), _boardPosition.Left(), _boardPosition.Right() };
-        foreach (BoardData.BoardPos tile in tiles)
+        if (Input.GetKeyDown(PlayerInputs.SpecialAbility))
         {
-            SetTileToPlayerType(tile);
+            bool canInvokeSpecialAbility = true;
+            BoardData.BoardPos[] tiles = new BoardData.BoardPos[4] { _boardPosition.Up(), _boardPosition.Down(), _boardPosition.Left(), _boardPosition.Right() };
+            foreach (BoardData.BoardPos tile in tiles)
+            {
+                SetTileToPlayerType(tile);
+            }
         }
     }
 
     public void MechanicDestroy(BoardData.BoardPos pos)
     {
-        bool canInvokeSpecialAbility = true;
-        List<BoardData.BoardPos> tiles = new List<BoardData.BoardPos> { _boardPosition.Up(), _boardPosition.Down(), _boardPosition.Left(), _boardPosition.Right(), _boardPosition };
-        foreach (BoardData.BoardPos tile in tiles)
+        if (Input.GetKeyDown(PlayerInputs.SpecialAbility))
         {
-            SetTileToDestroyedType(tile);
+            List<BoardData.BoardPos> tiles = new List<BoardData.BoardPos> { _boardPosition.Up(), _boardPosition.Down(), _boardPosition.Left(), _boardPosition.Right(), _boardPosition };
+            foreach (BoardData.BoardPos tile in tiles)
+            {
+                SetTileToDestroyedType(tile);
+            }
         }
     }
 
@@ -157,27 +206,38 @@ public class PlayerController : MonoBehaviour
         {
             PlayerTileType = TileData.TileType.Mechanic;
         }
+        _coolDownManager = transform.GetComponent<CoolDownManager>();
+
     }
 
     protected void Start()
     {
-
-        InitBoardPos = new BoardData.BoardPos();
-        InitBoardPos.x = 0;
-        InitBoardPos.y = 0;
         _boardPosition = InitBoardPos;
 }
 
     protected void Update()
     {
+        
         PlayerMovement();
-        if (Input.GetKeyDown(PlayerInputs.PlaceTile))
+        if (IsPlacementLocked == false)
+            //Debug.Log("Coold Down is unlocked!");
         {
-            if (FindIfNearbyTilesAreBuilt(_boardPosition))
+            if (Input.GetKeyDown(PlayerInputs.PlaceTile))
             {
-                SetCurrentTileToPlayerType();
+                if (FindIfNearbyTilesAreBuilt(_boardPosition))
+                {
+                    SetCurrentTileToPlayerType();
+                    IsPlacementLocked = true;
+                    Debug.Log("I tried to lock the placemernt lock");
+
+                    StartCoroutine(_coolDownManager.StartCooldDown());
+                }
+                
             }
+
         }
+        Debug.Log("placement lock is :" + IsPlacementLocked);
+
     }
 
 }

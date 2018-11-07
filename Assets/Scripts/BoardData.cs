@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class BoardData
 {
+    [Serializable]
     public struct BoardPos
     {
         public int x;
