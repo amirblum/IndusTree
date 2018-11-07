@@ -9,6 +9,8 @@ public class AudioManager : MonoBehaviour
     public AudioSource _baselineMusic;
     public AudioSource[] winningMusic;
     public AudioSource[] winnerMusic;
+    public AudioClip _organicQuad;
+    public AudioClip _mechanicQuad;
     public static AudioManager Instance;
     protected void Awake()
     {
@@ -53,5 +55,15 @@ public class AudioManager : MonoBehaviour
         winningMusic[0].Stop();
         winningMusic[1].Stop();
         winnerMusic[winner].Play();
+    }
+
+    internal void PlayOrganicQuadSfx()
+    {
+        PlaySfx(_organicQuad);
+    }
+
+    internal void PlayMechanicQuadSfx()
+    {
+        PlaySfx(_mechanicQuad);        
     }
 }

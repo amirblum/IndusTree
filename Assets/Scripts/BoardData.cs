@@ -233,6 +233,15 @@ public class BoardData
             }
         }
 
+        if (i == 3 && j == 1)
+        {
+            AudioManager.Instance.PlayOrganicQuadSfx();
+        }
+        else if (i == 1 && j == 3)
+        {
+            AudioManager.Instance.PlayMechanicQuadSfx();
+        }
+
         return (i == 3 && j == 1) || (i == 1 && j == 3);
     }
 
