@@ -2032,5 +2032,20 @@ PrefabInstance:
       propertyPath: _mechanicQuad
       value: 
       objectReference: {fileID: 8300000, guid: b3b11f4ed04bf478eb1855d948ffc2e1, type: 3}
+    - target: {fileID: 6664239022934029508, guid: 927202c21df95477c9a6063ed6e47252,
+        type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6891840037518616289, guid: 927202c21df95477c9a6063ed6e47252,
+        type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6398872751150195284, guid: 927202c21df95477c9a6063ed6e47252,
+        type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 927202c21df95477c9a6063ed6e47252, type: 3}
