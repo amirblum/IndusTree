@@ -11,7 +11,14 @@ public class BoardView : MonoBehaviour
     [SerializeField] TileView _emptyTile;
     [SerializeField] TileView _destroyedTile;
     [SerializeField] TileView[] _playerTiles;
+    [Header("UI")]
+    [SerializeField] GameObject[] _playerWinMessages;
     [SerializeField] Text[] _playerScoresText;
+
+    [Header("Sound effects")]
+    [SerializeField] AudioClip[] _p1PlacementSounds;
+    [SerializeField] AudioClip[] _p2PlacementSounds;
+
     private TileView[,] _placedTiles;
     private BoardData _boardData;
     private MeshFilter _boardModel;
@@ -21,7 +28,7 @@ public class BoardView : MonoBehaviour
     protected void Awake()
     {
         Instance = this;
-        
+
         _boardModel = GetComponentInChildren<MeshFilter>();
         _boardUnitySize = _boardModel.mesh.bounds.size.x * _boardModel.transform.localScale.x;
         _tileUnitySize = _boardUnitySize / _boardSize;
@@ -31,9 +38,15 @@ public class BoardView : MonoBehaviour
         _boardData = new BoardData();
         _boardData.OnPlacedTileEvent += OnPlacedTile;
         _boardData.OnScoreUpdatedEvent += UpdateScoreTexts;
+        _boardData.OnGameOverEvent += OnGameOver;
         _boardData.InitializeBoard(_boardSize, _startingTiles);
 
         UpdateScoreTexts();
+    }
+
+    private void OnGameOver(int winner)
+    {
+        _playerWinMessages[winner].SetActive(true);
     }
 
     private void UpdateScoreTexts()
@@ -67,6 +80,18 @@ public class BoardView : MonoBehaviour
         newTile.transform.position = GetUnityPos(pos);
 
         _placedTiles[pos.x, pos.y] = newTile;
+
+        if (AudioManager.Instance == null)
+        {
+            return;
+        }
+
+        var tileType = tileData.tileType;
+        if (tileType == TileData.TileType.Organic || tileType == TileData.TileType.Mechanic)
+        {
+            var sounds = tileData.tileType == TileData.TileType.Organic ? _p1PlacementSounds : _p2PlacementSounds;
+            AudioManager.Instance.PlaySfx(sounds[Random.Range(0, sounds.Length)]);
+        }
     }
 
     private void OnRaisedTile(TileData tileData, int previousHeight, int newHeight)
