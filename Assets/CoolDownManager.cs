@@ -8,6 +8,13 @@ public class CoolDownManager : MonoBehaviour
     public static CoolDownManager Instance;
     public float CoolDownTimer;
 
+    
+
+    //public void coolDownControl ()
+    //{
+
+    //}
+
     // Start is called before the first frame update
     void Start()
     {
