@@ -4,11 +4,24 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    private AudioSource _sfxSource;
     public AudioSource[] winningMusic;
     public static AudioManager Instance;
+    protected void Awake()
+    {
+        Instance = this;
+
+        _sfxSource = GetComponent<AudioSource>();
+    }
+
     protected void Start()
     {
         BoardData.Instance.OnScoreUpdatedEvent += OnScoreUpdated;
+    }
+
+    public void PlaySfx(AudioClip sfx)
+    {
+        _sfxSource.PlayOneShot(sfx);
     }
 
     private void OnScoreUpdated()
