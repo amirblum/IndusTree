@@ -259,7 +259,6 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-        Debug.Log("placement lock is :" + IsPlacementLocked);
 
     }
 
