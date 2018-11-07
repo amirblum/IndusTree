@@ -85,6 +85,22 @@ public class PlayerController : MonoBehaviour
             
     }
 
+    public void SetTileToDestroyedType(BoardData.BoardPos pos)
+    {
+
+        if (GetCurrentTile().tileType == TileData.TileType.Empty)
+        {
+            BoardData.Instance.PlaceTile(TileData.TileType.Destroyed, pos);
+        }
+        else
+        {
+            //In case we add a time counter for placing a tile, do not "spend" the tile placement token (I.E lock placement)
+            Debug.Log("Tile Not Empty! Current tile type is :" + GetCurrentTile().tileType);
+        }
+
+    }
+
+
     public void SetCurrentTileToPlayerType ()
     {
         SetTileToPlayerType(_boardPosition);
@@ -115,11 +131,21 @@ public class PlayerController : MonoBehaviour
 
     public void OrganicExpand (BoardData.BoardPos pos)
     {
-        bool canExpand = true;
+        bool canInvokeSpecialAbility = true;
         BoardData.BoardPos[] tiles = new BoardData.BoardPos[4] { _boardPosition.Up(), _boardPosition.Down(), _boardPosition.Left(), _boardPosition.Right() };
         foreach (BoardData.BoardPos tile in tiles)
         {
             SetTileToPlayerType(tile);
+        }
+    }
+
+    public void MechanicDestroy(BoardData.BoardPos pos)
+    {
+        bool canInvokeSpecialAbility = true;
+        List<BoardData.BoardPos> tiles = new List<BoardData.BoardPos> { _boardPosition.Up(), _boardPosition.Down(), _boardPosition.Left(), _boardPosition.Right(), _boardPosition };
+        foreach (BoardData.BoardPos tile in tiles)
+        {
+            SetTileToDestroyedType(tile);
         }
     }
 
