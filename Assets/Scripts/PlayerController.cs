@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public BoardData.BoardPos InitBoardPos;
     public bool IsPlacementLocked;
     private CoolDownManager _coolDownManager;
+    public GameObject PlayerCursor;
     
 
     public float movementTime;
@@ -38,6 +39,13 @@ public class PlayerController : MonoBehaviour
 
         }
     
+
+
+    public void ResetCountDown ()
+    {
+        transform.GetComponent<CoolDownManager>().CountdownTimer = transform.GetComponent<CoolDownManager>().CoolDownTimer;
+    }
+
     //add boundary condition
     public void PlayerMovement ( )
     {   
@@ -252,12 +260,22 @@ public class PlayerController : MonoBehaviour
                     SetCurrentTileToPlayerType();
                     IsPlacementLocked = true;
                     // Debug.Log("I tried to lock the placemernt lock");
+                    ResetCountDown();
 
                     StartCoroutine(_coolDownManager.StartCooldDown());
                 }
                 
             }
 
+        }
+
+        if (transform.GetComponent<CoolDownManager>().CountdownTimer >= 0)
+        {
+            PlayerCursor.GetComponent<Renderer>().material.color = transform.GetComponent<CoolDownManager>().InitColor;
+        }
+        else
+        {
+            PlayerCursor.GetComponent<Renderer>().material.color = transform.GetComponent<CoolDownManager>().TargetColor;
         }
 
     }

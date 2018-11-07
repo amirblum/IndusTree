@@ -7,8 +7,32 @@ public class CoolDownManager : MonoBehaviour
 
     public static CoolDownManager Instance;
     public float CoolDownTimer;
+    public GameObject PlayerCursorObject;
+    public Renderer PlayerCursorRenderer;
+    public float EmissionFactor;
+    public Color TargetColor;
+    public float CountdownTimer;
+    public float CountDownTimerForColorLerp;
+    public float ClampdLerpedCountdown;
+    public Color InitColor;
 
-    
+    public void DecrementFromCoolDownTimerToZero ()
+    {
+        
+        if (CountdownTimer >= 0)
+        {
+            CountdownTimer -= Time.deltaTime;
+            Debug.Log("Countdown Timer is :  " + CountdownTimer);
+        }
+        
+    }
+
+    public void ChangeColorToHighLight ()
+    {
+        //PlayerCursorObject.GetComponent<Renderer>().material.color = Color.Lerp(GradientTarget, PlayerCursorObject.GetComponent<Renderer>().material.color, Mathf.PingPong(Time.time, 1));
+        PlayerCursorObject.GetComponent<Renderer>().material.color = new Color(TargetColor.r, TargetColor.g, TargetColor.b);
+        
+    }
 
     //public void coolDownControl ()
     //{
@@ -18,6 +42,8 @@ public class CoolDownManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        CountdownTimer = CoolDownTimer;
+        //var PlayerCursorMaterial = PlayerCursorObject.GetComponent<Renderer>().material;
 
     }
 
@@ -43,7 +69,7 @@ public class CoolDownManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        DecrementFromCoolDownTimerToZero();
     }
 
     protected void Awake()
