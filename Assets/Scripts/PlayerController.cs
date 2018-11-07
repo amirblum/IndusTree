@@ -42,19 +42,19 @@ public class PlayerController : MonoBehaviour
     public void PlayerMovement ( )
     {   
 
-        if (Input.GetKeyDown(PlayerInputs.up) && _boardPosition.y < BoardData.Instance.BoardSize - 1 && CanMoveToTile(_boardPosition.Up()) == true )
+        if (Input.GetKeyDown(PlayerInputs.up) && _boardPosition.y < BoardData.Instance.BoardSize - 1)
         {
             _boardPosition = _boardPosition.Up();
         }
-        if (Input.GetKeyDown(PlayerInputs.down) && _boardPosition.y > 0 && CanMoveToTile(_boardPosition.Down()) == true)
+        if (Input.GetKeyDown(PlayerInputs.down) && _boardPosition.y > 0 )
         {
             _boardPosition = _boardPosition.Down();
         }
-        if (Input.GetKeyDown(PlayerInputs.left) && _boardPosition.x > 0 && CanMoveToTile(_boardPosition.Left()) == true)
+        if (Input.GetKeyDown(PlayerInputs.left) && _boardPosition.x > 0 )
         {
             _boardPosition = _boardPosition.Left();
         }
-        if (Input.GetKeyDown(PlayerInputs.right) && _boardPosition.x < BoardData.Instance.BoardSize - 1 && CanMoveToTile(_boardPosition.Right()) == true)
+        if (Input.GetKeyDown(PlayerInputs.right) && _boardPosition.x < BoardData.Instance.BoardSize - 1)
         {
             _boardPosition = _boardPosition.Right();
         }
