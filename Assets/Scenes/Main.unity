@@ -198,6 +198,7 @@ GameObject:
   - component: {fileID: 331014695}
   - component: {fileID: 331014697}
   - component: {fileID: 331014696}
+  - component: {fileID: 331014698}
   m_Layer: 5
   m_Name: Tutorial
   m_TagString: Untagged
@@ -244,7 +245,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: e6ed66d30103644a092c042a5caf9f20, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -261,6 +262,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 331014694}
   m_CullTransparentMesh: 0
+--- !u!114 &331014698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 331014694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 455ec8dc2944a4df985dce93266ea0ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &420922370
 GameObject:
   m_ObjectHideFlags: 0
@@ -1689,7 +1702,7 @@ PrefabInstance:
     - target: {fileID: 2376622805621286543, guid: c02a658579f964c6e8a88c8d3dac29b7,
         type: 3}
       propertyPath: _startingTiles.Array.data[0].x
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2376622805621286543, guid: c02a658579f964c6e8a88c8d3dac29b7,
         type: 3}
@@ -1699,7 +1712,7 @@ PrefabInstance:
     - target: {fileID: 2376622805621286543, guid: c02a658579f964c6e8a88c8d3dac29b7,
         type: 3}
       propertyPath: _startingTiles.Array.data[1].x
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2376622805621286543, guid: c02a658579f964c6e8a88c8d3dac29b7,
         type: 3}
