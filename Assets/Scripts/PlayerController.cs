@@ -16,7 +16,8 @@ public class PlayerController : MonoBehaviour
     private CoolDownManager _coolDownManager;
     
 
-    
+    public float movementTime;
+    private Coroutine _movementCoroutine;
 
     [Serializable]
     public class PlayerInputStrings  {
@@ -57,8 +58,30 @@ public class PlayerController : MonoBehaviour
         {
             _boardPosition = _boardPosition.Right();
         }
-        transform.position = BoardView.Instance.GetUnityPos(_boardPosition);
         
+        if (_movementCoroutine == null)
+        {
+            _movementCoroutine = StartCoroutine(MovementCoroutine());
+        }
+    }
+
+    private IEnumerator MovementCoroutine()
+    {
+        var currentPosition = transform.position;
+        var desiredPosition = BoardView.Instance.GetUnityPos(_boardPosition);
+
+        var timer = 0.0f;
+        while (timer < movementTime)
+        {
+            float a = timer / movementTime;
+            transform.position = Vector3.Lerp(currentPosition, desiredPosition, a);
+            timer += Time.deltaTime;
+
+            yield return null;
+        }
+
+        transform.position = desiredPosition;
+        _movementCoroutine = null;
     }
 
 

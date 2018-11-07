@@ -1,33 +1,15 @@
 fileFormatVersion: 2
-guid: e837e66de7f84f64eb2bb971535d8d38
+guid: 1cd42f32b5a0f4f4c8a6d6d639ad9f90
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: Cylinder.014
-    100002: Cylinder.015
-    100004: Cylinder.016
-    100006: //RootNode
-    100008: Cylinder.024
-    400000: Cylinder.014
-    400002: Cylinder.015
-    400004: Cylinder.016
-    400006: //RootNode
-    400008: Cylinder.024
-    2100000: No Name
-    2100002: Material.003
-    2100004: Material.005
-    2300000: Cylinder.014
-    2300002: Cylinder.015
-    2300004: Cylinder.016
-    2300006: Cylinder.024
-    3300000: Cylinder.014
-    3300002: Cylinder.015
-    3300004: Cylinder.016
-    3300006: Cylinder.024
-    4300000: Cylinder.016
-    4300002: Cylinder.015
-    4300004: Cylinder.014
-    4300006: Cylinder.024
+    100000: //RootNode
+    400000: //RootNode
+    2100000: GJ_0005_Concrete
+    2100002: GJ_0005_PipeBlinn
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Full_HP
   externalObjects: {}
   materials:
     importMaterials: 1
