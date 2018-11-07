@@ -887,6 +887,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2376622805621286543, guid: c02a658579f964c6e8a88c8d3dac29b7,
         type: 3}
+      propertyPath: _startingTiles.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2376622805621286543, guid: c02a658579f964c6e8a88c8d3dac29b7,
+        type: 3}
       propertyPath: _playerScoresText.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -989,5 +994,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5816179635696272426, guid: 4e225ab5475af4650a64474e9984c39a,
         type: 3}
+    - target: {fileID: 2376622805621286543, guid: c02a658579f964c6e8a88c8d3dac29b7,
+        type: 3}
+      propertyPath: _startingTiles.Array.data[0].x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2376622805621286543, guid: c02a658579f964c6e8a88c8d3dac29b7,
+        type: 3}
+      propertyPath: _startingTiles.Array.data[0].y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2376622805621286543, guid: c02a658579f964c6e8a88c8d3dac29b7,
+        type: 3}
+      propertyPath: _startingTiles.Array.data[1].x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2376622805621286543, guid: c02a658579f964c6e8a88c8d3dac29b7,
+        type: 3}
+      propertyPath: _startingTiles.Array.data[1].y
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c02a658579f964c6e8a88c8d3dac29b7, type: 3}

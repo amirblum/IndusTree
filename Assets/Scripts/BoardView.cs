@@ -7,6 +7,7 @@ public class BoardView : MonoBehaviour
 {
     public static BoardView Instance;
     [SerializeField] int _boardSize;
+    [SerializeField] Vector2[] _startingTiles;
     [SerializeField] TileView _emptyTile;
     [SerializeField] TileView _destroyedTile;
     [SerializeField] TileView[] _playerTiles;
@@ -30,7 +31,7 @@ public class BoardView : MonoBehaviour
 
         _boardData = new BoardData();
         _boardData.OnPlacedTileEvent += OnPlacedTile;
-        _boardData.InitializeBoard(_boardSize, _playerTiles.Length);
+        _boardData.InitializeBoard(_boardSize, _startingTiles);
 
         _playerScores = new int[2];
         SetScoreText(0,0);

@@ -45,10 +45,10 @@ public class BoardData
         Instance = this;
     }
 
-    public void InitializeBoard(int boardSize, int numOfPlayers)
+    public void InitializeBoard(int boardSize, Vector2[] startingTiles)
     {
         BoardSize = boardSize;
-        NumOfPlayers = numOfPlayers;
+        NumOfPlayers = startingTiles.Length;
 
         _board = new TileData[BoardSize, BoardSize];
         for (int i = 0; i < BoardSize; i++)
@@ -58,9 +58,13 @@ public class BoardData
                 var pos = new BoardPos { x = i, y = j };
                 var tileData = new TileData(pos);
 
-                if (i == 3 && j == 0)
+                for (int k = 0; k < startingTiles.Length; k++)
                 {
-                    tileData.tileType = TileData.TileType.Organic;
+                    Vector2 startingTile = (Vector2)startingTiles[k];
+                    if (i == (int)startingTile.x && j == (int)startingTile.y)
+                    {
+                        tileData.tileType = (TileData.TileType)k;
+                    }
                 }
                 _board[i, j] = tileData;
                 OnPlacedTileEvent?.Invoke(tileData, pos);
