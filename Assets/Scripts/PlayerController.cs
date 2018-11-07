@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
         public KeyCode left;
         public KeyCode right;
         public KeyCode PlaceTile;
+        public KeyCode SpecialAbility;
 
         
         //public PlayerInputStrings(string Sup, string Sdown, string, Sleft, string Sright)
@@ -71,8 +72,7 @@ public class PlayerController : MonoBehaviour
 
     public void SetTileToPlayerType (BoardData.BoardPos pos)
     {
-        if (Input.GetKeyDown(PlayerInputs.PlaceTile))
-            {
+        
                 if (GetCurrentTile().tileType == TileData.TileType.Empty)
                 {
                     BoardData.Instance.PlaceTile(PlayerTileType, pos);
@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
                     //In case we add a time counter for placing a tile, do not "spend" the tile placement token (I.E lock placement)
                     Debug.Log("Tile Not Empty! Current tile type is :" + GetCurrentTile().tileType);
                 }
-            }
+            
     }
 
     public void SetCurrentTileToPlayerType ()
@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour
 
     public bool FindIfNearbyTilesAreBuilt (BoardData.BoardPos pos)
     {
-        if (GetTile(pos.Up()).tileType == TileData.TileType.Mechanic || GetTile(pos.Up()).tileType == TileData.TileType.Organic )
+        if (GetTile(pos.Up()).tileType == TileData.TileType.Mechanic || GetTile(pos.Up()).tileType == TileData.TileType.Organic)
         {
             return true;
         }
@@ -145,9 +145,12 @@ public class PlayerController : MonoBehaviour
     protected void Update()
     {
         PlayerMovement();
-        if (FindIfNearbyTilesAreBuilt(_boardPosition))
+        if (Input.GetKeyDown(PlayerInputs.PlaceTile))
         {
-            SetCurrentTileToPlayerType();
+            if (FindIfNearbyTilesAreBuilt(_boardPosition))
+            {
+                SetCurrentTileToPlayerType();
+            }
         }
     }
 

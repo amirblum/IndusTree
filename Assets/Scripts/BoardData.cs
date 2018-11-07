@@ -90,7 +90,7 @@ public class BoardData
         // Check the quads.
         var quads = GetQuads(newTilePosition);
         bool closedAQuad = false;
-        bool destroyAQuad = false;
+        var destroyedQuads = new List<TileData[]>();
 
         foreach (var quad in quads)
         {
@@ -106,26 +106,24 @@ public class BoardData
             } 
             else if (QuadIsDestroyed(quad))
             {
-                destroyAQuad = true;
+                destroyedQuads.Add(quad);
             }
         }
-        if (destroyAQuad)
-        {
-            var niner = GetNiner(newTilePosition);
-            
-            foreach (var tile in niner)
-            {
-                PlaceTile(TileData.TileType.Destroyed, tile.boardPos);
-            }
-
-        }
-        else if (closedAQuad) 
+        if (closedAQuad) 
         {
             var niner = GetNiner(newTilePosition);
 
             foreach (var tile in niner)
             {
                 tile.RaiseTile();
+            }
+        }
+        foreach (var destroyedQuad in destroyedQuads)
+        {            
+            foreach (var tile in destroyedQuad)
+            {
+                tile.DestroyTile();
+                PlaceTile(TileData.TileType.Destroyed, tile.boardPos);
             }
         }
     }
