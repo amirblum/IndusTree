@@ -49,8 +49,11 @@ public class BoardView : MonoBehaviour
     {
         // Out with the old!
         var currentTile = _placedTiles[pos.x, pos.y];
-        Debug.Log("Destroying " + currentTile.tileData);
-        Destroy(currentTile);
+        if (currentTile != null)
+        {
+            Debug.Log("Destroying " + currentTile.tileData.tileType);
+            Destroy(currentTile);
+        }
 
         // In with the new!
         TileView newTile = Instantiate(GetTileFromData(tileData));
