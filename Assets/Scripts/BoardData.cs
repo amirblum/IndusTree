@@ -46,7 +46,7 @@ public class BoardData
         Instance = this;
     }
 
-    public void InitializeBoard(int boardSize, Vector2[] startingTiles)
+    public void InitializeBoard(int boardSize, BoardPos[] startingTiles)
     {
         BoardSize = boardSize;
         NumOfPlayers = startingTiles.Length;
@@ -61,8 +61,7 @@ public class BoardData
 
                 for (int k = 0; k < startingTiles.Length; k++)
                 {
-                    Vector2 startingTile = (Vector2)startingTiles[k];
-                    if (i == (int)startingTile.x && j == (int)startingTile.y)
+                    if (i == (int)startingTiles[k].x && j == (int)startingTiles[k].y)
                     {
                         tileData.tileType = (TileData.TileType)k;
                     }
